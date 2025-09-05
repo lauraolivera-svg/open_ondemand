@@ -1,0 +1,18 @@
+---
+- name: Copy multiple files
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  loop:
+    - src: ansible/files/my_cluster.yml
+      dest: /etc/ood/config/clusters.d/
+    - src: ansible/files/config.yaml
+      dest: /etc/ood/dex/
+    - src: ansible/files/nginx_stage.yml
+      dest: /etc/ood/config/
+    - src: ansible/files/ood_portal.yml
+      dest: /etc/ood/config/
+    - src: ansible/files/add_files_permissions/session_store.rb
+      dest: /var/www/ood/apps/sys/dashboard/config/initializers/
+    - src: ansible/files/add_files_permissions/session_store.rb
+      dest: /var/www/ood/apps/sys/myjobs/config/initializers/

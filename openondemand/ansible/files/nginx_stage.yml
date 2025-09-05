@@ -1,0 +1,13 @@
+---
+pun_custom_env:
+
+ OOD_ALLOWLIST_PATH: "/home:/var/www/ood"
+
+ OOD_JOB_NAME_ILLEGAL_CHARS: "/"
+
+ OOD_BRAND_BG_COLOR: '#3D87F5'
+
+ #OOD_DASHBOARD_LOGO: "/public/irblogo.png"
+ #OOD_DASHBOARD_LOGO_WIDTH: "220"
+ #OOD_DASHBOARD_LOGO_HEIGHT: "220"
+ 

@@ -1,0 +1,32 @@
+---
+- name: Add port 80/tcp to the firewall
+  firewalld:
+    port: 80/tcp
+    permanent: yes
+    state: enabled
+    immediate: yes
+    zone: public
+
+- name: Add port 443/tcp to the firewall
+  firewalld:
+    port: 443/tcp
+    permanent: yes
+    state: enabled
+    immediate: yes
+    zone: public
+ 
+- name: Add port 5554/tcp to the firewall
+  firewalld:
+    port: 5554/tcp
+    permanent: yes
+    state: enabled
+    immediate: yes
+    zone: public
+
+- name: Restart firewall rules
+  systemd:
+    name: firewalld
+    state: restarted
+  become: yes
+  become_user: root
+

@@ -1,0 +1,22 @@
+pinned_apps:
+  - sys/*
+
+dashboard_layout:
+  rows:
+    - columns:
+      - width: 12
+        widgets:
+          - pinned_apps
+          - motd
+
+
+# 'nav_bar' is the left side of the navigation bar.
+nav_bar:
+  - files
+  - jobs
+  - clusters
+  - interactive apps
+  - my interactive sessions
+
+
+

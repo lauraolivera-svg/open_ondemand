@@ -1,0 +1,12 @@
+---
+- name: Create custom folder
+  command: mkdir -p /etc/ood/config/ondemand.d/
+
+- name: Copy custom files
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  loop:
+    - src: ansible/files/ondemand.yml
+      dest: /etc/ood/config/ondemand.d/
+

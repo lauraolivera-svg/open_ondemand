@@ -1,0 +1,21 @@
+---
+v2:
+  metadata:
+    title: "cluster_prueba"
+  login:
+    host: "localhost"
+  job:
+    adapter: "slurm"
+    bin: "/usr/local/bin"
+    conf: "/etc/slurm/slurm.conf"
+  batch_connect:
+    basic:
+      script_wrapper: |
+        module purge
+        %s
+    vnc:
+      script_wrapper: |
+        module purge
+        export PATH="/opt/TurboVNC/bin/:$PATH"
+        export WEBSOCKIFY_CMD="/usr/local/bin/websockify"
+        %s

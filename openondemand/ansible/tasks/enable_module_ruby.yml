@@ -1,0 +1,25 @@
+---
+- name: Install RVM GPG keys
+  command: gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+
+- name: Install dependencies for RVM and Ruby
+  command: apt-get install -y curl gpg build-essential libssl-dev libreadline-dev zlib1g-dev
+
+- name: Install RVM
+  shell: curl -sSL https://get.rvm.io | bash -s stable
+  args:
+    executable: /bin/bash
+
+- name: Install Ruby 3.3.0 via RVM
+  shell: |
+    source /etc/profile.d/rvm.sh
+    rvm install 3.3.0
+  args:
+    executable: /bin/bash
+
+- name: Set Ruby 3.3.0 as default
+  shell: |
+    source /etc/profile.d/rvm.sh
+    rvm use 3.3.0 --default
+  args:
+    executable: /bin/bash

@@ -1,0 +1,10 @@
+- name: Crear directorio de configuracion de Dashboard
+  command: mkdir -p /etc/ood/config/apps/dashboard/
+
+- name: Desactivar SSH desde Dashboard
+  copy:
+    dest: /etc/ood/config/apps/dashboard/env
+    content: |
+          # don't show ssh link in batch connect card
+          OOD_BC_SSH_TO_COMPUTE_NODE=off
+

@@ -1,0 +1,13 @@
+---
+- name: Add NodeSource Node.js 20 repository
+  shell: curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+  args:
+    executable: /bin/bash
+  become: true
+
+- name: Install Node.js
+  apt:
+    name: nodejs
+    state: present
+    update_cache: yes
+  become: true

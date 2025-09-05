@@ -1,0 +1,3 @@
+---
+- name: Install apt-utils and dpkg-dev
+  command: apt-get install -y apt-utils dpkg-dev

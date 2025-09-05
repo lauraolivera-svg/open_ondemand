@@ -1,0 +1,77 @@
+---
+- name: Install essential packages with apt
+  apt:
+    name:
+      - libjpeg-dev
+      - rclone
+      - ruby-dev
+      - rake
+      - gem
+      - libsqlite3-dev
+      - automake
+      - check
+      - libcurl4-openssl-dev
+      - gcc
+      - apache2-dev
+      - libjansson-dev
+      - make
+      - nano
+      - libpcre3-dev
+      - rpm
+#      - rpmdevtools
+      - wget
+      - apt-utils
+      - dpkg-dev
+      - libffi-dev
+      - libyaml-dev
+      - liblua5.3-dev
+#      - scl-utils
+#      - scl-utils-build
+#      - mod_ldap
+#      - mod_ssl
+#      - gd.x86_64
+      - libgd-dev
+      - libxslt1-dev
+      - git
+      - libturbojpeg-dev
+      - libssl-dev
+      - python3-jwcrypto
+      - python3-numpy
+      - python3-redis
+      - python3-simplejson
+      - rsync
+    state: latest
+
+- name: Pre-install dependencies
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Download OnDemand repository package
+  get_url:
+    url: https://apt.osc.edu/ondemand/4.0/ondemand-release-web_4.0.0-bookworm_all.deb
+    dest: /tmp/ondemand-release-web_4.0.0-bookworm_all.deb
+    mode: '0644'
+  become: true
+
+- name: Install OnDemand repository package
+  apt:
+    deb: /tmp/ondemand-release-web_4.0.0-bookworm_all.deb
+  become: true
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+  become: true
+
+- name: Install ondemand and ondemand-dex
+  apt:
+    name:
+      - ondemand
+      - ondemand-dex
+    state: present
+  become: true

@@ -1,0 +1,23 @@
+---
+- name: Install OpenOnDemand
+  hosts: control
+  become: true
+  ignore_errors: yes
+
+  tasks:
+#    - import_tasks: ansible/tasks/firewalld_rules.yml
+#    - import_tasks: ansible/tasks/disable_selinux.yml
+    - import_tasks: ansible/tasks/install_software-properties-common.yml
+    - import_tasks: ansible/tasks/enable_module_ruby.yml
+    - import_tasks: ansible/tasks/enable_module_nodejs.yml
+    - import_tasks: ansible/tasks/install_apt_utils.yml
+    - import_tasks: ansible/tasks/install_packages.yml 
+    - import_tasks: ansible/tasks/copy_files.yml
+    - import_tasks: ansible/tasks/modify_etc_hosts.yml
+    - import_tasks: ansible/tasks/delete_line_httpd_conf.yml
+    - import_tasks: ansible/tasks/apply_config_ood_portal.yml
+    - import_tasks: ansible/tasks/copy_rb_session_files.yml
+    - import_tasks: ansible/tasks/install_apps.yml
+    - import_tasks: ansible/tasks/disable_ssh_form_cards.yml
+    - import_tasks: ansible/tasks/create_custom_files.yml
+    - import_tasks: ansible/tasks/enable_and_start_apps.yml

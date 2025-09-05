@@ -1,0 +1,7 @@
+---
+- name: Add IP address and FQDN to /etc/hosts
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    insertbefore: '^127.0.0.1'
+    line: 127.0.0.1 www.artelia.ood.com
+    create: yes

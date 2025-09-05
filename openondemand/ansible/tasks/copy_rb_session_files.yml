@@ -1,0 +1,11 @@
+---
+- name: Copy Ruby storage session files
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  loop:
+    - src: ansible/files/dashboard/session_store.rb
+      dest: /var/www/ood/apps/sys/dashboard/config/initializers/session_store.rb
+    - src: ansible/files/myjobs/session_store.rb
+      dest: /var/www/ood/apps/sys/myjobs/config/initializers/session_store.rb
+ 

@@ -1,0 +1,13 @@
+image: python:3.7
+options:
+ max-time: 30
+pipelines:
+  branches:
+    master:
+      - step:
+          name: Deploy to test servers
+          caches:
+            - pip
+          script:
+            - pip install ansible
+            - ansible-playbook -i ansible/inventory -l ondemand install_ondemand.yml

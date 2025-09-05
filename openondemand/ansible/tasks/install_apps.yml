@@ -1,0 +1,43 @@
+# Virtual Desktop
+- name: Copy Desktop Config
+  copy:
+    src: ansible/files/desktop/form.yml
+    dest: /var/www/ood/apps/sys/bc_desktop/
+
+# Jupyter
+
+- name: Clonar repositorio de Git para Jupyter
+  git:
+    repo: https://github.com/OSC/bc_example_jupyter.git
+    dest: /var/www/ood/apps/sys/jupyter
+
+- name: Copy Jupyter Config
+  copy:
+    src: ansible/files/jupyter_files/form.yml
+    dest: /var/www/ood/apps/sys/jupyter/
+
+#vmd
+
+- name: Clonar repositorio de Git para VMD
+  git:
+    repo: https://github.com/OSC/bc_osc_vmd
+    dest: /var/www/ood/apps/sys/vmd
+
+- name: Copy VMD  Config
+  copy:
+    src: ansible/files/vmd_files/form.yml
+    dest: /var/www/ood/apps/sys/vmd/
+
+
+# Rstudio
+
+#- name: Clonar repositorio de Git para RStudio
+#  git:
+#    repo: https://github.com/OSC/bc_example_rstudio.git
+#    dest: /var/www/ood/apps/sys/Rstudio
+  
+#- name: Copy Rstudio Config
+#  copy:
+#    src: ansible/files/rstudio_files/form.yml
+#    dest: /var/www/ood/apps/sys/Rstudio/
+

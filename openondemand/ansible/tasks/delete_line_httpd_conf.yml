@@ -1,0 +1,21 @@
+---
+- name: Delete line Listen 80 at httpd.conf
+  lineinfile:
+    path: /etc/apache2/sites-available/ood-portal.conf
+    line: 'Listen 80'
+    state: absent
+    
+- name: Delete line Listen 80 at httpd.conf
+  lineinfile:
+    path: /etc/apache2/sites-enabled/ood-portal.conf
+    line: 'Listen 80'
+    state: absent
+
+#- name: Deactivate previous apache2 page
+#  command: sudo a2dissite 000-default.conf
+  
+#- name: Reload apache2 configuration
+#  command: sudo systemctl reload apache2
+
+#- name: Restart apache2
+#  command: sudo systemctl restart apache2

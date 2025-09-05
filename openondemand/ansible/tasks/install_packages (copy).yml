@@ -1,0 +1,130 @@
+---
+- name: Install essential packages with apt
+  dnf:
+    name:
+      - libjpeg-dev
+      - rclone
+      - ruby-dev
+      - rake
+      - gem
+      - libsqlite3-dev
+      - automake
+      - check
+      - libcurl4-openssl-dev
+      - gcc
+      - apache2-dev
+      - libjansson-dev
+      - make
+      - nano
+      - libpcre3-dev
+      - rpm
+#      - rpmdevtools
+      - wget
+      - apt-utils
+      - dpkg-dev
+      - libffi-dev
+      - libyaml-dev
+      - liblua5.3-dev
+#      - scl-utils
+#      - scl-utils-build
+#      - mod_ldap
+#      - mod_ssl
+#      - gd.x86_64
+      - libgd-dev
+      - libxslt1-dev
+      - git
+      - libturbojpeg-dev
+      - libssl-dev
+      - python3-jwcrypto
+      - python3-numpy
+      - python3-redis
+      - python3-simplejson
+    state: latest
+
+- name: Find pre_ood RPM files
+  ansible.builtin.find:
+    paths: "ansible/RPMs/pre_ood/"
+    patterns: "*.rpm"
+  register: pre_ood_rpm_files
+
+- name: Print found pre_ood RPM files
+  ansible.builtin.debug:
+    msg: "{{ pre_ood_rpm_files.files | map(attribute='path') | list }}"
+
+- name: Install pre_ood RPMs
+  shell: rpm -Uvh "{{ item.path }}"
+  with_items: "{{ pre_ood_rpm_files.files }}"
+  ignore_errors: yes
+
+###
+
+- name: Find ood_step_1 RPM files
+  ansible.builtin.find:
+    paths: "ansible/RPMs/ood_step_1/"
+    patterns: "[1-9]*.rpm"
+  register: ood_step_1_rpm_files
+
+- name: Set sorted RPM file list
+  ansible.builtin.set_fact:
+    ood_step_1_sorted_rpm_files: "{{ ood_step_1_rpm_files.files | map(attribute='path') | sort }}"
+
+- name: Print sorted found ood_step_1 RPM files
+  ansible.builtin.debug:
+    msg: "{{ ood_step_1_sorted_rpm_files }}"
+
+- name: Install ondemand-runtime from ood_step_1 first
+  shell: rpm -Uvh "ansible/RPMs/ood_step_1/ondemand-runtime-*.rpm"
+  ignore_errors: yes
+
+- name: Install ood_step_1 RPMs
+  shell: rpm -Uvh "{{ item }}"
+  with_items: "{{ ood_step_1_sorted_rpm_files }}"
+  ignore_errors: yes
+
+#####
+
+- name: Find ood_step_2 RPM files
+  ansible.builtin.find:
+    paths: "ansible/RPMs/ood_step_2/"
+    patterns: "[1-9]*.rpm"
+  register: ood_step_2_rpm_files
+
+- name: Set sorted RPM file list
+  ansible.builtin.set_fact:
+    ood_step_2_sorted_rpm_files: "{{ ood_step_2_rpm_files.files | map(attribute='path') | sort }}"
+
+- name: Print found ood_step_2 RPM files
+  ansible.builtin.debug:
+    msg: "{{ ood_step_2_sorted_rpm_files }}"
+
+- name: Install ood_step_2 RPMs
+  shell: rpm -Uvh "{{ item }}"
+  with_items: "{{ ood_step_2_sorted_rpm_files }}"
+  ignore_errors: yes
+
+####
+
+- name: Find ood_step_3 RPM files
+  ansible.builtin.find:
+    paths: "ansible/RPMs/ood_step_3/"
+    patterns: "[1-9]*.rpm"
+  register: ood_step_3_rpm_files
+
+- name: Set sorted RPM file list
+  ansible.builtin.set_fact:
+    ood_step_3_sorted_rpm_files: "{{ ood_step_3_rpm_files.files | map(attribute='path') | sort }}"
+
+
+- name: Print found ood_step_3 RPM files
+  ansible.builtin.debug:
+    msg: "{{ ood_step_3_sorted_rpm_files}}"
+
+- name: Install ood_step_3 RPMs
+  shell: rpm -Uvh "{{ item }}"
+  with_items: "{{ ood_step_3_sorted_rpm_files }}"
+  ignore_errors: yes
+
+- name: Install apache2
+  yum:
+    name: ['apache2']
+    state: present

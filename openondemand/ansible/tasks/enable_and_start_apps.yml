@@ -1,0 +1,30 @@
+---
+- name: Enable and start apache2
+  systemd:
+    name: apache2
+    state: started
+    enabled: yes
+  become: yes
+  become_user: root
+
+- name: Restart apache2
+  systemd:
+    name: apache2
+    state: restarted
+  become: yes
+  become_user: root
+
+- name: Enable and start ondemand-dex
+  systemd:
+    name: ondemand-dex
+    state: started
+    enabled: yes
+  become: yes
+  become_user: root
+
+- name: Restart ondemand-dex
+  systemd:
+    name: ondemand-dex
+    state: restarted
+  become: yes
+  become_user: root

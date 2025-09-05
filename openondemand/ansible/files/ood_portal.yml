@@ -1,0 +1,54 @@
+---
+port: 80
+listen_addr_port: 80
+servername: www.artelia.ood.com
+host_regex: "[^/]+"
+node_uri: '/node'
+rnode_uri: '/rnode'
+ssl: null
+#  - 'SSLCertificateFile "/etc/pki/tls/certs/localhost.crt"'
+#  - 'SSLCertificateKeyFile "/etc/pki/tls/private/localhost.key"'
+#- 'SSLCertificateChainFile "/etc/pki/tls/certs/ondemand.my_center.edu-interm.crt"'
+dex:
+ frontend:
+
+    theme: ondemand
+
+    issuer: "ARTELIA OnDemand"
+
+    extra:
+
+      loginTitle: "Log in with username and pass"
+
+      loginButtonText: "Log in"
+
+      usernamePlaceholder: "Username"
+
+      passwordPlaceholder: "Password"
+      
+dex:
+ connectors:
+   - type: ldap
+     id: ldap
+     name: OOD
+     config:
+       host: 10.0.4.15:389
+       insecureNoSSL: true
+       insecureSkipVerify: false
+       bindDN: cn=Manager,dc=test,dc=com
+       bindPW: hola
+       userSearch:
+         baseDN: dc=test,dc=com
+         filter: "(objectClass=posixAccount)"
+         username: uid
+         idAttr: uid
+         emailAttr: DN
+         preferredUsernameAttr: uid
+       groupSearch:
+         baseDN: ou=Group,dc=example,dc=com
+         filter: "(objectClass=posixGroup)"
+         userMatchers:
+           - userAttr: DN
+             groupAttr: member
+         nameAttr: cn
+
