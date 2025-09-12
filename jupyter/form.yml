@@ -1,0 +1,58 @@
+---
+form:
+  - modules
+  - extra_jupyter_args
+  - bc_num_hours
+  - bc_cores
+  - memtask
+#  - ood_gpu_var
+#  - ood_num_gpu_var
+#  - jupyter_interface
+
+attributes:
+  modules: "python3"
+  extra_jupyter_args: ""
+
+  memtask:
+    widget: "text_field"
+    value: "2G"
+    label: "Memory per job"
+    help: |
+      - Valid examples: 4G , 1G , 512MB ...
+
+  bc_cores:
+    widget: "number_field"
+    max: 64
+    min: 1
+    step: 1
+    value: 1
+    label: "Number of cores"
+    help: "Select the number of cores"
+
+#  ood_gpu_var:
+#    widget: "check_box"
+#    help: |-
+#      If checked, job will be executed on a GPU node.
+#    label: "Request GPU"
+#    value: 0
+#    id: "ood_gpu_var_id"
+
+#  ood_num_gpu_var:
+#    widget: "number_field"
+#    help: |-
+#      Number of GPUs to use for your job.
+#    label: "Number of GPUs"
+#    value: 1
+#    min: 1
+#    max: 1
+#    step: 1
+#    id: "ood_num_gpu_var_id"
+
+  jupyter_interface:
+    widget: "select"
+    label: "Jupyter Interface"
+    help: "Choose whether to launch Jupyter Notebook or JupyterLab. If nothing is selected, it will default to Jupyter Notebook."
+    options:
+      - [ "Jupyter Notebook", "notebook" ]
+      - [ "Jupyter Lab", "lab" ]
+    value: "lab"
